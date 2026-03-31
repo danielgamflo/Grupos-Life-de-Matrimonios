@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grupos Life — Matrimonios</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #FAF8F4;
+    --warm-white: #FFFFF9;
+    --ink: #1C1A17;
+    --ink-soft: #4A4740;
+    --ink-muted: #8C8880;
+    --accent: #C4622D;
+    --accent-light: #F5E6DC;
+    --accent-pale: #FBF3EE;
+    --gold: #B8923A;
+    --gold-light: #F5EDD8;
+    --sage: #4A6741;
+    --sage-light: #E4EDE3;
+    --blue-soft: #3A5A7C;
+    --blue-light: #E3EBF3;
+    --violet: #5A3A7C;
+    --violet-light: #EDE3F3;
+    --border: rgba(28,26,23,0.10);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* Hero */
+  .hero {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 4rem 2rem 3.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    background: rgba(196,98,45,0.12);
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -40px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(184,146,58,0.08);
+    pointer-events: none;
+  }
+
+  .hero-label {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(196,98,45,0.15);
+    padding: 4px 14px;
+    border-radius: 100px;
+    margin-bottom: 1.25rem;
+  }
+
+  .hero h1 {
+    font-family: 'Lora', serif;
+    font-size: clamp(2rem, 6vw, 3.2rem);
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 0.75rem;
+    color: #FAF8F4;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-sub {
+    font-size: 15px;
+    color: rgba(250,248,244,0.55);
+    max-width: 420px;
+    margin: 0 auto 2rem;
+  }
+
+  .hero-meta {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    font-size: 13px;
+    color: rgba(250,248,244,0.45);
+  }
+
+  .hero-meta span { display: flex; align-items: center; gap: 6px; }
+
+  /* Main */
+  .container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+  }
+
+  /* Section label */
+  .section-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin: 3rem 0 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* Blocks */
+  .block {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 0;
+    margin-bottom: 1px;
+    opacity: 0;
+    transform: translateY(16px);
+    animation: fadeUp 0.5s ease forwards;
+  }
+
+  .block:nth-child(1) { animation-delay: 0.05s; }
+  .block:nth-child(2) { animation-delay: 0.12s; }
+  .block:nth-child(3) { animation-delay: 0.19s; }
+  .block:nth-child(4) { animation-delay: 0.26s; }
+  .block:nth-child(5) { animation-delay: 0.33s; }
+  .block:nth-child(6) { animation-delay: 0.40s; }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .block-time {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 18px;
+    position: relative;
+  }
+
+  .block-time::after {
+    content: '';
+    position: absolute;
+    top: 46px;
+    bottom: -1px;
+    left: 50%;
+    width: 1px;
+    background: var(--border);
+  }
+
+  .block:last-child .block-time::after { display: none; }
+
+  .time-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .time-num {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  .time-unit {
+    font-size: 9px;
+    color: var(--ink-muted);
+    line-height: 1;
+  }
+
+  .block-content {
+    padding: 14px 0 24px 16px;
+  }
+
+  .block-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 100px;
+    margin-bottom: 8px;
+  }
+
+  .tag-bienvenida { background: var(--sage-light); color: var(--sage); }
+  .tag-rompehielo { background: var(--gold-light); color: var(--gold); }
+  .tag-conexion   { background: var(--violet-light); color: var(--violet); }
+  .tag-palabra    { background: var(--blue-light); color: var(--blue-soft); }
+  .tag-oracion    { background: var(--accent-light); color: var(--accent); }
+  .tag-cierre     { background: var(--sage-light); color: var(--sage); }
+
+  .block-title {
+    font-family: 'Lora', serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+
+  .block-desc {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.65;
+    margin-bottom: 10px;
+  }
+
+  .block-tip {
+    font-size: 12.5px;
+    color: var(--ink-muted);
+    font-style: italic;
+    padding-left: 10px;
+    border-left: 2px solid var(--border);
+    line-height: 1.5;
+  }
+
+  /* Total */
+  .total-row {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+    padding: 1.25rem 0 0;
+    border-top: 1px solid var(--border);
+    margin-top: 0.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .total-label { font-size: 13px; color: var(--ink-muted); }
+  .total-value {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    padding: 4px 14px;
+    border-radius: 100px;
+  }
+
+  /* Season section */
+  .season-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 3rem;
+  }
+
+  @media (max-width: 480px) {
+    .season-grid { grid-template-columns: 1fr; }
+  }
+
+  .season-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    opacity: 0;
+    animation: fadeUp 0.5s ease forwards;
+  }
+
+  .season-card:nth-child(1) { animation-delay: 0.1s; }
+  .season-card:nth-child(2) { animation-delay: 0.18s; }
+  .season-card:nth-child(3) { animation-delay: 0.26s; }
+  .season-card:nth-child(4) { animation-delay: 0.34s; }
+  .season-card:nth-child(5) { animation-delay: 0.42s; }
+
+  .season-num {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--ink-muted);
+    margin-bottom: 4px;
+  }
+
+  .season-title {
+    font-family: 'Lora', serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .season-months {
+    font-size: 11px;
+    color: var(--ink-muted);
+    margin-bottom: 8px;
+  }
+
+  .season-desc {
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+  }
+
+  .season-accent {
+    display: block;
+    width: 28px;
+    height: 3px;
+    border-radius: 2px;
+    margin-bottom: 12px;
+  }
+
+  /* Footer */
+  footer {
+    background: var(--ink);
+    color: rgba(250,248,244,0.4);
+    text-align: center;
+    padding: 2rem;
+    font-size: 12px;
+  }
+
+  footer strong {
+    color: rgba(250,248,244,0.7);
+    font-weight: 500;
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-label">Grupos Life</div>
+  <h1>Primera reunión<br><em>de matrimonios</em></h1>
+  <p class="hero-sub">Guía de conducción para anfitriones — con tiempos y dinámicas</p>
+  <div class="hero-meta">
+    <span>⏱ 60 minutos</span>
+    <span>💑 Matrimonios</span>
+    <span>📍 The Life Church Santiago</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="section-label">Pauta de la reunión</div>
+
+  <div class="block">
+    <div class="block-time">
+      <div class="time-circle">
+        <span class="time-num">5</span>
+        <span class="time-unit">min</span>
+      </div>
+    </div>
+    <div class="block-content">
+      <span class="block-tag tag-bienvenida">Bienvenida</span>
+      <div class="block-title">Recibir y presentar el grupo</div>
+      <p class="block-desc">Ustedes dos se presentan como pareja — quiénes son, cuánto llevan juntos, por qué están acá. Breve, honesto, cálido.</p>
+      <p class="block-tip">"Tampoco somos expertos — estamos en esto junto a ustedes."</p>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-time">
+      <div class="time-circle">
+        <span class="time-num">15</span>
+        <span class="time-unit">min</span>
+      </div>
+    </div>
+    <div class="block-content">
+      <span class="block-tag tag-rompehielo">Rompehielo</span>
+      <div class="block-title">Una cosa que admiro y nunca he dicho en público</div>
+      <p class="block-desc">Cada pareja dice una cosa que admira de su cónyuge — frente a todos. Ustedes van primero. Esto marca el tono de vulnerabilidad del grupo.</p>
+      <p class="block-tip">Si hay silencio, no lo llenen — dejen que la incomodidad trabaje.</p>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-time">
+      <div class="time-circle">
+        <span class="time-num">15</span>
+        <span class="time-unit">min</span>
+      </div>
+    </div>
+    <div class="block-content">
+      <span class="block-tag tag-conexion">Conexión</span>
+      <div class="block-title">¿Qué espera cada uno del grupo?</div>
+      <p class="block-desc">Ronda abierta: ¿qué buscan acá? ¿qué les gustaría que fuera este espacio? Dejen que ellos construyan la visión también — así se apropian del grupo.</p>
+      <p class="block-tip">Tomen nota mental de lo que digan — lo usarán en reuniones futuras.</p>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-time">
+      <div class="time-circle">
+        <span class="time-num">10</span>
+        <span class="time-unit">min</span>
+      </div>
+    </div>
+    <div class="block-content">
+      <span class="block-tag tag-palabra">Palabra</span>
+      <div class="block-title">Eclesiastés 4:9-10 — la fuerza de dos</div>
+      <p class="block-desc">Lean el pasaje juntos. Reflexión breve: el matrimonio no es solo amor romántico — es una alianza estratégica. Dos son más fuertes. ¿Están funcionando como equipo?</p>
+      <p class="block-tip">No prediquen — hagan una sola pregunta y dejen que la gente responda.</p>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-time">
+      <div class="time-circle">
+        <span class="time-num">10</span>
+        <span class="time-unit">min</span>
+      </div>
+    </div>
+    <div class="block-content">
+      <span class="block-tag tag-oracion">Oración</span>
+      <div class="block-title">Orar en pareja — por la pareja de al lado</div>
+      <p class="block-desc">Cada matrimonio ora brevemente por el matrimonio que tienen al lado. Si no saben orar juntos, es el primer ejercicio. Tranquilo, sin presión.</p>
+      <p class="block-tip">Ustedes cierran con una oración general por el grupo.</p>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-time">
+      <div class="time-circle">
+        <span class="time-num">5</span>
+        <span class="time-unit">min</span>
+      </div>
+    </div>
+    <div class="block-content">
+      <span class="block-tag tag-cierre">Cierre</span>
+      <div class="block-title">Próxima reunión y tarea de pareja</div>
+      <p class="block-desc">Confirmen fecha de la próxima reunión. Tarea: esta semana díganse una vez algo que aprecian del otro — fuera de rutina, sin contexto especial.</p>
+      <p class="block-tip">Simple, medible, romántico. Que salgan con algo concreto que hacer.</p>
+    </div>
+  </div>
+
+  <div class="total-row">
+    <span class="total-label">Duración total</span>
+    <span class="total-value">~60 min</span>
+  </div>
+
+  <div class="section-label">La temporada completa</div>
+
+  <div class="season-grid">
+
+    <div class="season-card">
+      <span class="season-accent" style="background: var(--sage);"></span>
+      <div class="season-num">Bloque 1</div>
+      <div class="season-title">Nos conocemos</div>
+      <div class="season-months">Meses 1 – 2</div>
+      <p class="season-desc">¿Quiénes somos como pareja? ¿De dónde venimos? Dinámicas de presentación que incluyan a ambos cónyuges.</p>
+    </div>
+
+    <div class="season-card">
+      <span class="season-accent" style="background: var(--gold);"></span>
+      <div class="season-num">Bloque 2</div>
+      <div class="season-title">Nos comunicamos</div>
+      <div class="season-months">Meses 3 – 4</div>
+      <p class="season-desc">Lenguajes del amor, diferencias hombre/mujer, cómo peleamos y cómo nos reconciliamos.</p>
+    </div>
+
+    <div class="season-card">
+      <span class="season-accent" style="background: var(--blue-soft);"></span>
+      <div class="season-num">Bloque 3</div>
+      <div class="season-title">Nos fortalecemos</div>
+      <div class="season-months">Meses 5 – 6</div>
+      <p class="season-desc">Fe en pareja. Orar juntos, crecer espiritualmente como unidad. Ser un matrimonio con propósito.</p>
+    </div>
+
+    <div class="season-card">
+      <span class="season-accent" style="background: var(--violet);"></span>
+      <div class="season-num">Bloque 4</div>
+      <div class="season-title">Nos desafiamos</div>
+      <div class="season-months">Meses 7 – 8</div>
+      <p class="season-desc">Salir de la zona de confort juntos. Servir como pareja, soñar como pareja, hacer algo concreto juntos.</p>
+    </div>
+
+    <div class="season-card" style="grid-column: 1 / -1;">
+      <span class="season-accent" style="background: var(--accent);"></span>
+      <div class="season-num">Bloque 5</div>
+      <div class="season-title">Celebramos</div>
+      <div class="season-months">Meses 9 – 10</div>
+      <p class="season-desc">Testimonios, lo que cambió, lo que aprendimos. Invitar a nuevas parejas. Multiplicar el grupo.</p>
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  <strong>Grupos Life Matrimonios</strong> · The Life Church Santiago<br>
+  "Más vale dos que uno." — Eclesiastés 4:9
+</footer>
+
+</body>
+</html>
