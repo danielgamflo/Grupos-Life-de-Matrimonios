@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calendario 2025 · Grupo Life Matrimonios</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --naranja: #E8921A;
+    --naranja-claro: #F5A83A;
+    --naranja-suave: #FFF4E6;
+    --fondo: #F2F2F7;
+    --fondo-card: #FFFFFF;
+    --fondo-secundario: #F8F8FB;
+    --texto: #1C1C1E;
+    --texto-2: #3A3A3C;
+    --texto-3: #6C6C70;
+    --texto-4: #AEAEB2;
+    --borde: rgba(0,0,0,0.08);
+    --especial: #34A853;
+    --especial-suave: #EAF7EE;
+    --sombra: 0 2px 12px rgba(0,0,0,0.07);
+    --sombra-sm: 0 1px 4px rgba(0,0,0,0.06);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--fondo);
+    color: var(--texto);
+    min-height: 100vh;
+  }
+
+  .hero {
+    background: var(--fondo-card);
+    padding: 52px 24px 36px;
+    text-align: center;
+    border-bottom: 1px solid var(--borde);
+  }
+
+  .logo-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--naranja-suave);
+    border-radius: 100px;
+    padding: 6px 14px;
+    margin-bottom: 22px;
+  }
+
+  .logo-dot { width: 7px; height: 7px; background: var(--naranja); border-radius: 50%; }
+
+  .logo-badge span {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--naranja);
+  }
+
+  .hero h1 {
+    font-size: clamp(32px, 7vw, 52px); font-weight: 700;
+    line-height: 1.1; letter-spacing: -0.02em; color: var(--texto); margin-bottom: 6px;
+  }
+
+  .hero h1 span { color: var(--naranja); }
+
+  .hero-sub { font-size: 14px; color: var(--texto-3); font-weight: 400; margin-bottom: 24px; }
+
+  .identidad {
+    display: inline-block; background: var(--naranja-suave); color: var(--naranja);
+    font-size: 12px; font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase; padding: 6px 14px; border-radius: 8px;
+  }
+
+  .descripcion {
+    background: var(--fondo-card); padding: 18px 24px;
+    border-bottom: 1px solid var(--borde);
+  }
+
+  .descripcion p {
+    font-size: 13px; color: var(--texto-3); line-height: 1.65; text-align: center;
+  }
+
+  .descripcion strong { color: var(--texto-2); font-weight: 600; }
+
+  .anfitriones {
+    background: var(--fondo-card); padding: 20px 24px 16px;
+    display: flex; align-items: center; justify-content: center;
+    gap: 24px; border-bottom: 1px solid var(--borde);
+  }
+
+  .anfitrion-link {
+    text-decoration: none; display: flex; flex-direction: column;
+    align-items: center; gap: 5px;
+  }
+
+  .anfitrion-avatar {
+    width: 46px; height: 46px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--naranja-claro), var(--naranja));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; box-shadow: var(--sombra-sm);
+  }
+
+  .anfitrion-nombre { font-size: 11px; color: var(--texto-3); font-weight: 500; }
+  .anfitrion-ig { font-size: 11px; color: var(--naranja); font-weight: 600; }
+  .anfitrion-sep { font-size: 20px; color: var(--texto-4); padding-bottom: 16px; font-weight: 300; }
+
+  .info-bar {
+    background: var(--fondo-card); padding: 16px 20px;
+    display: flex; flex-direction: column; gap: 14px;
+    border-bottom: 1px solid var(--borde); margin-bottom: 12px;
+  }
+
+  .info-item { display: flex; align-items: flex-start; gap: 12px; }
+
+  .info-icon {
+    width: 34px; height: 34px; background: var(--naranja-suave);
+    border-radius: 9px; display: flex; align-items: center;
+    justify-content: center; font-size: 15px; flex-shrink: 0;
+  }
+
+  .info-label {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.09em;
+    text-transform: uppercase; color: var(--naranja); display: block; margin-bottom: 2px;
+  }
+
+  .info-value { font-size: 13px; color: var(--texto-2); line-height: 1.45; }
+  .info-value a { color: var(--naranja); text-decoration: none; font-weight: 500; }
+
+  .leyenda { padding: 12px 20px 4px; display: flex; gap: 16px; flex-wrap: wrap; }
+
+  .leyenda-item {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 11px; color: var(--texto-3); font-weight: 400;
+  }
+
+  .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .dot.confirmada { background: var(--naranja); }
+  .dot.tentativa  { background: var(--texto-4); }
+  .dot.especial   { background: var(--especial); }
+
+  .toggle-all-wrap { padding: 8px 20px 4px; display: flex; justify-content: flex-end; }
+
+  .btn-toggle-all {
+    background: transparent; border: 1px solid var(--borde);
+    color: var(--texto-3); font-family: 'Inter', sans-serif;
+    font-size: 11px; font-weight: 500; letter-spacing: 0.04em;
+    padding: 5px 12px; border-radius: 100px; cursor: pointer; transition: all 0.18s;
+  }
+
+  .btn-toggle-all:hover {
+    border-color: var(--naranja); color: var(--naranja); background: var(--naranja-suave);
+  }
+
+  .bloque-section {
+    margin: 0 12px 10px; background: var(--fondo-card);
+    border-radius: 16px; box-shadow: var(--sombra);
+    overflow: hidden; border: 1px solid var(--borde);
+  }
+
+  .bloque-header {
+    padding: 16px 18px; display: flex; align-items: center; gap: 12px;
+    cursor: pointer; user-select: none; transition: background 0.15s;
+  }
+
+  .bloque-header:hover { background: var(--fondo-secundario); }
+
+  .bloque-num {
+    width: 26px; height: 26px; background: var(--naranja); color: #fff;
+    font-size: 11px; font-weight: 700; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+
+  .bloque-num.tentativo {
+    background: var(--fondo); border: 1.5px solid var(--texto-4); color: var(--texto-4);
+  }
+
+  .bloque-titulo { font-size: 16px; font-weight: 600; color: var(--texto); letter-spacing: -0.01em; }
+  .bloque-subtitulo { font-size: 11px; color: var(--texto-4); font-weight: 400; margin-left: auto; }
+
+  .bloque-arrow {
+    font-size: 10px; color: var(--texto-4);
+    transition: transform 0.28s ease; margin-left: 4px;
+  }
+
+  .bloque-section.abierto .bloque-arrow { transform: rotate(180deg); }
+
+  .bloque-body { overflow: hidden; max-height: 0; transition: max-height 0.38s ease; }
+  .bloque-section.abierto .bloque-body { max-height: 2000px; }
+
+  .reuniones { padding: 0 14px 14px; display: flex; flex-direction: column; gap: 8px; }
+
+  .bloque-divider { height: 1px; background: var(--borde); margin: 0 18px 12px; }
+
+  .reunion-card {
+    background: var(--fondo-secundario); border: 1px solid var(--borde);
+    border-radius: 12px; padding: 14px 14px 12px;
+    display: grid; grid-template-columns: 50px 1fr; gap: 12px; align-items: start;
+  }
+
+  .reunion-card.confirmada { border-left: 3px solid var(--naranja); }
+  .reunion-card.tentativa  { border-left: 3px solid var(--texto-4); opacity: 0.75; }
+  .reunion-card.especial   { border-left: 3px solid var(--especial); background: var(--especial-suave); }
+
+  .fecha-bloque { text-align: center; }
+
+  .fecha-dia {
+    font-size: 26px; font-weight: 700; line-height: 1;
+    color: var(--texto); letter-spacing: -0.02em;
+  }
+
+  .reunion-card.tentativa .fecha-dia { color: var(--texto-4); }
+
+  .fecha-mes {
+    font-size: 9px; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--naranja); margin-top: 2px;
+  }
+
+  .reunion-card.tentativa .fecha-mes { color: var(--texto-4); }
+  .reunion-card.especial  .fecha-mes { color: var(--especial); }
+
+  .reunion-tema {
+    font-family: 'Courier New', monospace; font-size: 9px; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--texto-4);
+    margin-bottom: 2px; display: block;
+  }
+
+  .reunion-titulo {
+    font-size: 13px; font-weight: 600; color: var(--texto);
+    margin-bottom: 3px; line-height: 1.3;
+  }
+
+  .reunion-card.tentativa .reunion-titulo { color: var(--texto-3); }
+
+  .reunion-detalle { font-size: 12px; color: var(--texto-3); line-height: 1.4; }
+
+  .badge-confirmada, .badge-tentativa, .badge-especial {
+    display: inline-block; font-size: 9px; font-weight: 600;
+    letter-spacing: 0.07em; text-transform: uppercase;
+    padding: 2px 8px; border-radius: 100px; margin-top: 6px;
+  }
+
+  .badge-confirmada { background: var(--naranja-suave); color: var(--naranja); }
+  .badge-tentativa  { background: var(--fondo); color: var(--texto-4); border: 1px solid var(--borde); }
+  .badge-especial   { background: var(--especial-suave); color: var(--especial); }
+
+  .invitacion {
+    margin: 8px 12px 12px;
+    background: linear-gradient(135deg, var(--naranja-suave), #fff8ee);
+    border: 1px solid rgba(232,146,26,0.2); border-radius: 16px; padding: 22px 20px;
+  }
+
+  .invitacion-emoji { font-size: 20px; margin-bottom: 8px; }
+
+  .invitacion-titulo {
+    font-size: 15px; font-weight: 600; color: var(--texto);
+    line-height: 1.35; margin-bottom: 8px; letter-spacing: -0.01em;
+  }
+
+  .invitacion-texto { font-size: 13px; color: var(--texto-3); line-height: 1.6; }
+
+  footer {
+    padding: 28px 24px 48px; text-align: center;
+    border-top: 1px solid var(--borde); background: var(--fondo-card); margin-top: 8px;
+  }
+
+  .footer-logo { font-size: 14px; font-weight: 600; color: var(--texto-3); margin-bottom: 6px; }
+  .footer-logo span { color: var(--naranja); }
+
+  footer p { font-size: 12px; color: var(--texto-4); line-height: 1.65; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="logo-badge"><div class="logo-dot"></div><span>The Life Church Santiago</span></div>
+  <h1>Grupos <span>Life</span><br>Matrimonios</h1>
+  <p class="hero-sub">Anfitriones: Cami & Daniel · 2026</p>
+  <div class="identidad">Viviendo la vida con propósito</div>
+</div>
+
+<div class="descripcion">
+  <p>Los <strong>Grupos Life</strong> son encuentros pequeñas dentro de The Life Church — espacios para conectar, crecer y acompañarse en la vida real. Nos reunimos dos veces al mes en casa, con conversaciones honestas y fe compartida.</p>
+</div>
+
+<div class="anfitriones">
+  
+  <a href="https://instagram.com/cami.sep_" target="_blank" class="anfitrion-link">
+    <div class="anfitrion-avatar">👩</div>
+    <span class="anfitrion-nombre">Camila</span>
+    <span class="anfitrion-ig">@cami.sep_</span>
+  </a>
+  <div class="anfitrion-sep">&</div>
+  <a href="https://instagram.com/danigamflo" target="_blank" class="anfitrion-link">
+    <div class="anfitrion-avatar">🧔</div>
+    <span class="anfitrion-nombre">Daniel</span>
+    <span class="anfitrion-ig">@danigamflo</span>
+  </a>
+</div>
+
+<div class="info-bar">
+  <div class="info-item">
+    <div class="info-icon">🏠</div>
+    <div>
+      <span class="info-label">Lugar habitual</span>
+      <div class="info-value">Nuestro hogar 🧡<br><a href="https://maps.app.goo.gl/nqvAkxu9KcRe8k8R7" target="_blank">Calle Mirador Azul 1484, Depto. 1419, La Florida</a></div>
+    </div>
+  </div>
+  <div class="info-item">
+    <div class="info-icon">🚇</div>
+    <div>
+      <span class="info-label">Cómo llegar</span>
+      <div class="info-value">Metro Línea 5 → estación Mirador, y tomar el bus E17. También puedes combinar en la intermodal de Metro Bellavista de La Florida. Si el lugar cambia, lo verás reflejado aquí antes de cada reunión.</div>
+    </div>
+  </div>
+  <div class="info-item">
+    <div class="info-icon">🕖</div>
+    <div>
+      <span class="info-label">Horario</span>
+      <div class="info-value">Miércoles · 2 veces al mes · 7:30pm</div>
+    </div>
+  </div>
+</div>
+
+<div class="leyenda">
+  <div class="leyenda-item"><div class="dot confirmada"></div> Confirmada</div>
+  <div class="leyenda-item"><div class="dot tentativa"></div> Tentativa</div>
+  <div class="leyenda-item"><div class="dot especial"></div> Salida especial</div>
+</div>
+
+<div class="toggle-all-wrap">
+  <button class="btn-toggle-all" onclick="toggleTodos()">Expandir todo</button>
+</div>
+
+<!-- BLOQUE 1 -->
+<div class="bloque-section" data-inicio="2025-04-01" data-fin="2025-05-31">
+  <div class="bloque-header" onclick="toggleBloque(this.parentElement)">
+    <div class="bloque-num">1</div>
+    <div class="bloque-titulo">Tema: Nos conocemos</div>
+    <div class="bloque-subtitulo">Abr – May</div>
+    <span class="bloque-arrow">▼</span>
+  </div>
+  <div class="bloque-body">
+    <div class="bloque-divider"></div>
+    <div class="reuniones">
+      <div class="reunion-card confirmada">
+        <div class="fecha-bloque"><div class="fecha-dia">16</div><div class="fecha-mes">Abr</div></div>
+        <div class="reunion-info">
+          <div class="reunion-tema">Tema · Dios te conoce y yo quiero conocerte</div>
+          <div class="reunion-titulo">Reunión 1 - 7:30pm</div>
+          <div class="reunion-detalle">Mirador Azul 1484, Depto. 1419, La Florida</div>
+          <div class="badge-confirmada">Confirmada</div>
+        </div>
+      </div>
+      <div class="reunion-card confirmada">
+        <div class="fecha-bloque"><div class="fecha-dia">30</div><div class="fecha-mes">Abr</div></div>
+        <div class="reunion-info">
+          <div class="reunion-tema">Tema · Amar de forma intencional</div>
+          <div class="reunion-titulo">Reunión 2 - 7:30pm</div>
+          <div class="reunion-detalle">Mirador Azul 1484, Depto. 1419, La Florida</div>
+          <div class="badge-confirmada">Confirmada</div>
+        </div>
+      </div>
+      <div class="reunion-card confirmada">
+        <div class="fecha-bloque"><div class="fecha-dia">14</div><div class="fecha-mes">May</div></div>
+        <div class="reunion-info">
+          <div class="reunion-tema">Tema · Conociendo el Corazón</div>
+          <div class="reunion-titulo">Reunión 3 - 7:30pm</div>
+          <div class="reunion-detalle">Mirador Azul 1484, Depto. 1419, La Florida</div>
+          <div class="badge-confirmada">Confirmada</div>
+        </div>
+      </div>
+      <div class="reunion-card confirmada">
+        <div class="fecha-bloque"><div class="fecha-dia">28</div><div class="fecha-mes">May</div></div>
+        <div class="reunion-info">
+          <div class="reunion-tema">Tema · Creciendo Juntos</div>
+          <div class="reunion-titulo">Reunión 4 - 7:30pm</div>
+          <div class="reunion-detalle">Mirador Azul 1484, Depto. 1419, La Florida</div>
+          <div class="badge-confirmada">Confirmada</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BLOQUE 2 -->
+<div class="bloque-section" data-inicio="2025-06-01" data-fin="2025-07-31">
+  <div class="bloque-header" onclick="toggleBloque(this.parentElement)">
+    <div class="bloque-num tentativo">2</div>
+    <div class="bloque-titulo">Tema: Nos comunicamos</div>
+    <div class="bloque-subtitulo">Jun – Jul</div>
+    <span class="bloque-arrow">▼</span>
+  </div>
+  <div class="bloque-body">
+    <div class="bloque-divider"></div>
+    <div class="reuniones">
+      <div class="reunion-card especial">
+        <div class="fecha-bloque"><div class="fecha-dia">4</div><div class="fecha-mes">Jun</div></div>
+        <div class="reunion-info">
+          <div class="reunion-tema">Tema · Nos comunicamos</div>
+          <div class="reunion-titulo">Reunión 5 · Salida especial - Horario por confirmar 🌿</div>
+          <div class="reunion-detalle">Lugar por confirmar</div>
+          <div class="badge-especial">Salida especial</div>
+        </div>
+      </div>
+      <div class="reunion-card tentativa">
+        <div class="fecha-bloque"><div class="fecha-dia">18</div><div class="fecha-mes">Jun</div></div>
+        <div class="reunion-info">
+          <div class="reunion-tema">Tema · Nos comunicamos</div>
+          <div class="reunion-titulo">Reunión 6</div>
+          <div class="reunion-detalle">Mirador Azul 1484, Depto. 1419, La Florida</div>
+          <div class="badge-tentativa">Tentativa</div>
+        </div>
+      </div>
+      <div class="reunion-card tentativa">
+        <div class="fecha-bloque"><div class="fecha-dia">9</div><div class="fecha-mes">Jul</div></div>
+        <div class="reunion-info">
+          <div class="reunion-tema">Tema · Nos comunicamos</div>
+          <div class="reunion-titulo">Reunión 7</div>
+          <div class="reunion-detalle">Mirador Azul 1484, Depto. 1419, La Florida</div>
+          <div class="badge-tentativa">Tentativa</div>
+        </div>
+      </div>
+      <div class="reunion-card tentativa">
+        <div class="fecha-bloque"><div class="fecha-dia">23</div><div class="fecha-mes">Jul</div></div>
+        <div class="reunion-info">
+          <div class="reunion-tema">Tema · Nos comunicamos</div>
+          <div class="reunion-titulo">Reunión 8</div>
+          <div class="reunion-detalle">Mirador Azul 1484, Depto. 1419, La Florida</div>
+          <div class="badge-tentativa">Tentativa</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BLOQUE 3 -->
+<div class="bloque-section" data-inicio="2025-08-01" data-fin="2025-09-30">
+  <div class="bloque-header" onclick="toggleBloque(this.parentElement)">
+    <div class="bloque-num tentativo">3</div>
+    <div class="bloque-titulo">Tema: Nos fortalecemos</div>
+    <div class="bloque-subtitulo">Ago – Sep</div>
+    <span class="bloque-arrow">▼</span>
+  </div>
+  <div class="bloque-body">
+    <div class="bloque-divider"></div>
+    <div class="reuniones">
+      <div class="reunion-card tentativa">
+        <div class="fecha-bloque"><div class="fecha-dia">6</div><div class="fecha-mes">Ago</div></div>
+        <div class="reunion-info">
+          <div class="reunion-tema">Tema · Nos fortalecemos</div>
+          <div class="reunion-titulo">Reunión 9</div>
+          <div class="reunion-detalle">Mirador Azul 1484, Depto. 1419, La Florida</div>
+          <div class="badge-tentativa">Tentativa</div>
+        </div>
+      </div>
+      <div class="reunion-card tentativa">
+        <div class="fecha-bloque"><div class="fecha-dia">20</div><div class="fecha-mes">Ago</div></div>
+        <div class="reunion-info">
+          <div class="reunion-tema">Tema · Nos fortalecemos</div>
+          <div class="reunion-titulo">Reunión 10</div>
+          <div class="reunion-detalle">Mirador Azul 1484, Depto. 1419, La Florida</div>
+          <div class="badge-tentativa">Tentativa</div>
+        </div>
+      </div>
+      <div class="reunion-card tentativa">
+        <div class="fecha-bloque"><div class="fecha-dia">3</div><div class="fecha-mes">Sep</div></div>
+        <div class="reunion-info">
+          <div class="reunion-tema">Tema · Nos fortalecemos</div>
+          <div class="reunion-titulo">Reunión 11</div>
+          <div class="reunion-detalle">Mirador Azul 1484, Depto. 1419, La Florida</div>
+          <div class="badge-tentativa">Tentativa</div>
+        </div>
+      </div>
+      <div class="reunion-card especial">
+        <div class="fecha-bloque"><div class="fecha-dia">17</div><div class="fecha-mes">Sep</div></div>
+        <div class="reunion-info">
+          <div class="reunion-tema">Tema · Nos fortalecemos</div>
+          <div class="reunion-titulo">Reunión especial · Víspera del 18 🇨🇱</div>
+          <div class="reunion-detalle">Salida dieciochera · Lugar por confirmar</div>
+          <div class="badge-especial">Salida especial</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BLOQUE 4 -->
+<div class="bloque-section" data-inicio="2025-10-01" data-fin="2025-11-12">
+  <div class="bloque-header" onclick="toggleBloque(this.parentElement)">
+    <div class="bloque-num tentativo">4</div>
+    <div class="bloque-titulo">Tema: Nos desafiamos</div>
+    <div class="bloque-subtitulo">Oct – Nov</div>
+    <span class="bloque-arrow">▼</span>
+  </div>
+  <div class="bloque-body">
+    <div class="bloque-divider"></div>
+    <div class="reuniones">
+      <div class="reunion-card tentativa">
+        <div class="fecha-bloque"><div class="fecha-dia">1</div><div class="fecha-mes">Oct</div></div>
+        <div class="reunion-info">
+          <div class="reunion-tema">Tema · Nos desafiamos</div>
+          <div class="reunion-titulo">Reunión 12</div>
+          <div class="reunion-detalle">Mirador Azul 1484, Depto. 1419, La Florida</div>
+          <div class="badge-tentativa">Tentativa</div>
+        </div>
+      </div>
+      <div class="reunion-card tentativa">
+        <div class="fecha-bloque"><div class="fecha-dia">15</div><div class="fecha-mes">Oct</div></div>
+        <div class="reunion-info">
+          <div class="reunion-tema">Tema · Nos desafiamos</div>
+          <div class="reunion-titulo">Reunión 13</div>
+          <div class="reunion-detalle">Mirador Azul 1484, Depto. 1419, La Florida</div>
+          <div class="badge-tentativa">Tentativa</div>
+        </div>
+      </div>
+      <div class="reunion-card tentativa">
+        <div class="fecha-bloque"><div class="fecha-dia">29</div><div class="fecha-mes">Oct</div></div>
+        <div class="reunion-info">
+          <div class="reunion-tema">Tema · Nos desafiamos</div>
+          <div class="reunion-titulo">Reunión 14</div>
+          <div class="reunion-detalle">Mirador Azul 1484, Depto. 1419, La Florida</div>
+          <div class="badge-tentativa">Tentativa</div>
+        </div>
+      </div>
+      <div class="reunion-card tentativa">
+        <div class="fecha-bloque"><div class="fecha-dia">12</div><div class="fecha-mes">Nov</div></div>
+        <div class="reunion-info">
+          <div class="reunion-tema">Tema · Nos desafiamos</div>
+          <div class="reunion-titulo">Reunión 15</div>
+          <div class="reunion-detalle">Mirador Azul 1484, Depto. 1419, La Florida</div>
+          <div class="badge-tentativa">Tentativa</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BLOQUE 5 -->
+<div class="bloque-section" data-inicio="2025-11-13" data-fin="2025-12-31">
+  <div class="bloque-header" onclick="toggleBloque(this.parentElement)">
+    <div class="bloque-num tentativo">5</div>
+    <div class="bloque-titulo">Tema: Celebramos</div>
+    <div class="bloque-subtitulo">Nov – Dic</div>
+    <span class="bloque-arrow">▼</span>
+  </div>
+  <div class="bloque-body">
+    <div class="bloque-divider"></div>
+    <div class="reuniones">
+      <div class="reunion-card tentativa">
+        <div class="fecha-bloque"><div class="fecha-dia">26</div><div class="fecha-mes">Nov</div></div>
+        <div class="reunion-info">
+          <div class="reunion-tema">Tema · Celebramos</div>
+          <div class="reunion-titulo">Reunión 16</div>
+          <div class="reunion-detalle">Mirador Azul 1484, Depto. 1419, La Florida</div>
+          <div class="badge-tentativa">Tentativa</div>
+        </div>
+      </div>
+      <div class="reunion-card especial">
+        <div class="fecha-bloque"><div class="fecha-dia">10</div><div class="fecha-mes">Dic</div></div>
+        <div class="reunion-info">
+          <div class="reunion-tema">Tema · Celebramos</div>
+          <div class="reunion-titulo">Cierre de año 🎉</div>
+          <div class="reunion-detalle">Celebración especial · Lugar por confirmar</div>
+          <div class="badge-especial">Salida especial</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- INVITACIÓN -->
+<div class="invitacion">
+  <div class="invitacion-emoji">💬</div>
+  <div class="invitacion-titulo">¿Conoces a otro matrimonio que necesita esto?</div>
+  <div class="invitacion-texto">Si este grupo te está haciendo bien, no lo guardes solo. Siempre puedes invitar a una pareja a unirse — la mesa siempre tiene espacio.</div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Grupos <span>Life</span> Matrimonios</div>
+  <p>The Life Church Santiago · Cami & Daniel<br>
+  Las fechas tentativas están sujetas a cambio.<br>
+  Recuerda, siemore eres bienvenido.</p>
+</footer>
+
+<script>
+  function toggleBloque(seccion) {
+    seccion.classList.toggle('abierto');
+    actualizarBoton();
+  }
+
+  function toggleTodos() {
+    const bloques = document.querySelectorAll('.bloque-section');
+    const hayAlgunoCerrado = [...bloques].some(b => !b.classList.contains('abierto'));
+    bloques.forEach(b => b.classList.toggle('abierto', hayAlgunoCerrado));
+    actualizarBoton();
+  }
+
+  function actualizarBoton() {
+    const bloques = document.querySelectorAll('.bloque-section');
+    const todosAbiertos = [...bloques].every(b => b.classList.contains('abierto'));
+    document.querySelector('.btn-toggle-all').textContent = todosAbiertos ? 'Colapsar todo' : 'Expandir todo';
+  }
+
+  function abrirBloqueActual() {
+    const hoy = new Date();
+    const bloques = document.querySelectorAll('.bloque-section');
+    let bloqueActivo = null;
+
+    bloques.forEach(bloque => {
+      const inicio = new Date(bloque.dataset.inicio);
+      const fin = new Date(bloque.dataset.fin);
+      fin.setHours(23, 59, 59);
+      if (hoy >= inicio && hoy <= fin) bloqueActivo = bloque;
+    });
+
+    if (!bloqueActivo) {
+      bloqueActivo = [...bloques].find(b => new Date(b.dataset.fin) >= hoy) || bloques[0];
+    }
+
+    bloqueActivo.classList.add('abierto');
+    actualizarBoton();
+  }
+
+  abrirBloqueActual();
+</script>
+
+</body>
+</html>
